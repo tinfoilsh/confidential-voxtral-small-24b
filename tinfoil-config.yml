@@ -1,13 +1,13 @@
-shim-version: v0.2.15@sha256:5ca748b384b78b7e686b57ca66d9b3c552038ebab2ce60305004f76e573a8458
-cvm-version: 0.5.8
+shim-version: v0.3.5@sha256:f44c65a1f7db476be20c3431bb6facea8c2966606a07fbb5724a619f82bfa558
+cvm-version: 0.5.17
 cpus: 16
 memory: 65536
 gpus: full
 
 models:
-  - name: "whisper-large-v3-turbo"
-    repo: "openai/whisper-large-v3-turbo@41f01f3fe87f28c78e2fbf8b568835947dd65ed9"
-    mpk: "dd81839982fa01a289f7b60613055e4e1f789503c25a3535b75d53841f7f5b78_1622474752_55d2c545-4d89-5658-9ffd-ce0b4d07ac36"
+  - name: "voxtral-small-24b"
+    repo: "mistralai/Voxtral-Small-24B-2507@da5b42409f279fdd92febee0511a6c32828569c1"
+    mpk: "1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273_97062424576_b75d0e26-035d-5c22-85f8-559f8da80fc9"
 
 containers:
   - name: "whisper-large-v3-turbo"
@@ -16,19 +16,18 @@ containers:
       "--runtime", "nvidia",
       "--gpus", "all",
       "--ipc", "host",
-      "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.2@sha256:118f9b8188666e221f785444560d72094a5298fe4bd373ec49c2b64a99611e9d",
-      "--model", "/tinfoil/mpk/mpk-dd81839982fa01a289f7b60613055e4e1f789503c25a3535b75d53841f7f5b78",
-      "--served-model-name", "whisper-large-v3-turbo",
-      "--task", "transcription",
-      "--port", "8001"
+      "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.5@sha256:c22bac571cfb4dad17095a82d1bef79a199a67a8e75171f500e3f3489d9189ef",
+      "--model", "/tinfoil/mpk/mpk-1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273",
+      "--served-model-name", "voxtral-small-24b",
+      "--tokenizer-mode mistral",
+      "--config-format mistral",
+      "--load-format mistral",
+      "--port 8001"
     ]
 
 shim:
   listen-port: 443
   upstream-port: 8001
-  publish-attestation: true
-  tls-challenge: dns
-  control-plane: https://api.tinfoil.sh
   paths:
     - /v1/audio/transcriptions
     - /metrics
