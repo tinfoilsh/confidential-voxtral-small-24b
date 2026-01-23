@@ -16,7 +16,7 @@ containers:
       "--runtime", "nvidia",
       "--gpus", "all",
       "--ipc", "host",
-      "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.8@sha256:89978f5325cf75a195c352ef704c7debd9d2a01971b69eb6edba22cb371f0e85",
+      "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.9@sha256:7d25976ed6b5d3ca81b5a8de15899c4fb41dd07830a4bcee3138901e7be70b6f",
       "--model", "/tinfoil/mpk/mpk-1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273",
       "--served-model-name", "voxtral-small-24b",
       "--tokenizer-mode", "mistral",
