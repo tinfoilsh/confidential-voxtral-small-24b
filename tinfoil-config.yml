@@ -10,7 +10,7 @@ models:
     mpk: "1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273_97062424576_b75d0e26-035d-5c22-85f8-559f8da80fc9"
 
 containers:
-  - name: "whisper-large-v3-turbo"
+  - name: "voxtral-small-24b"
     image: ""
     args: [
       "--runtime", "nvidia",
