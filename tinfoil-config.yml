@@ -1,8 +1,7 @@
-shim-version: v0.3.5@sha256:f44c65a1f7db476be20c3431bb6facea8c2966606a07fbb5724a619f82bfa558
-cvm-version: 0.5.17
+shim-version: v0.3.16@sha256:20220be4487f241e7e2a9af6dd576d20ba35d71307bd777c8dba9ba5da03fb38
+cvm-version: 0.6.7
 cpus: 16
 memory: 65536
-gpus: full
 
 models:
   - name: "voxtral-small-24b"
@@ -11,12 +10,11 @@ models:
 
 containers:
   - name: "voxtral-small-24b"
-    image: ""
+    image: "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.10@sha256:67f8af54fba2b39c20f1169ac8ca0ab07065eb31d92ef7a16464433581068163"
+    runtime: nvidia
+    gpus: all
+    ipc: host
     args: [
-      "--runtime", "nvidia",
-      "--gpus", "all",
-      "--ipc", "host",
-      "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.10@sha256:67f8af54fba2b39c20f1169ac8ca0ab07065eb31d92ef7a16464433581068163",
       "--model", "/tinfoil/mpk/mpk-1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273",
       "--served-model-name", "voxtral-small-24b",
       "--tokenizer-mode", "mistral",
@@ -28,6 +26,7 @@ containers:
 shim:
   listen-port: 443
   upstream-port: 8082
+  authenticated: true
   paths:
     - /v1/audio/transcriptions
     - /v1/audio/translations
