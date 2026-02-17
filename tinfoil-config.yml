@@ -14,7 +14,7 @@ containers:
     runtime: nvidia
     gpus: all
     ipc: host
-    args: [
+    command: [
       "--model", "/tinfoil/mpk/mpk-1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273",
       "--served-model-name", "voxtral-small-24b",
       "--tokenizer-mode", "mistral",
