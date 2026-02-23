@@ -30,5 +30,6 @@ shim:
   paths:
     - /v1/audio/transcriptions
     - /v1/audio/translations
+    - /v1/chat/completions
     - /health
     - /metrics
