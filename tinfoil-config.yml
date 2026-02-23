@@ -10,7 +10,7 @@ models:
 
 containers:
   - name: "voxtral-small-24b"
-    image: "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.10@sha256:67f8af54fba2b39c20f1169ac8ca0ab07065eb31d92ef7a16464433581068163"
+    image: "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.11@sha256:5c91900505727f91a32a533be9715123e703ea6ffcd7888239b0ebc2fd976d50"
     runtime: nvidia
     gpus: all
     ipc: host
