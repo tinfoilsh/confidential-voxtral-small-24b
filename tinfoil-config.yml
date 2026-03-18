@@ -1,7 +1,7 @@
-shim-version: v0.3.16@sha256:20220be4487f241e7e2a9af6dd576d20ba35d71307bd777c8dba9ba5da03fb38
-cvm-version: 0.6.7
-cpus: 16
+cvm-version: 0.7.3
 memory: 65536
+cpus: 16
+gpus: 1
 
 models:
   - name: "voxtral-small-24b"
@@ -24,9 +24,12 @@ containers:
     ]
 
 shim:
-  listen-port: 443
   upstream-port: 8082
   authenticated: true
+  authenticated-endpoints:
+    - /v1/audio/transcriptions
+    - /v1/audio/translations
+    - /v1/chat/completions
   paths:
     - /v1/audio/transcriptions
     - /v1/audio/translations
