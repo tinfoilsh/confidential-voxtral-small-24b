@@ -1,4 +1,4 @@
-cvm-version: 0.7.3
+cvm-version: 0.10.2
 memory: 65536
 cpus: 16
 gpus: 1
@@ -14,6 +14,12 @@ containers:
     runtime: nvidia
     gpus: all
     ipc: host
+    restart: always
+    read_only: false
+    cap_add:
+      - IPC_LOCK
+      - SYS_RESOURCE
+      - SYS_NICE
     command: [
       "--model", "/tinfoil/mpk/mpk-1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273",
       "--served-model-name", "voxtral-small-24b",
@@ -22,6 +28,9 @@ containers:
       "--load-format", "mistral",
       "--port", "8001"
     ]
+    tmpfs:
+      /tmp: size=512m,mode=1777,exec
+      /root: size=2g,mode=0700,exec
 
 shim:
   upstream-port: 8082
