@@ -1,6 +1,6 @@
-cvm-version: 0.7.3
-memory: 65536
+cvm-version: 0.10.4
 cpus: 16
+memory: 65536
 gpus: 1
 
 models:
@@ -13,15 +13,20 @@ containers:
     image: "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.11@sha256:5c91900505727f91a32a533be9715123e703ea6ffcd7888239b0ebc2fd976d50"
     runtime: nvidia
     gpus: all
-    ipc: host
-    command: [
-      "--model", "/tinfoil/mpk/mpk-1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273",
-      "--served-model-name", "voxtral-small-24b",
-      "--tokenizer-mode", "mistral",
-      "--config-format", "mistral",
-      "--load-format", "mistral",
-      "--port", "8001"
-    ]
+    restart: always
+    env:
+      - PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"
+    command: ["--model", "/tinfoil/mpk/mpk-1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273", "--served-model-name",
+      "voxtral-small-24b", "--tokenizer-mode", "mistral", "--config-format", "mistral", "--load-format", "mistral", "--scheduling-policy",
+      "priority", "--port", "8001"]
+    tmpfs:
+      /tmp: size=512m,mode=1777,exec
+      /root: size=2g,mode=0700,exec
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60m
 
 shim:
   upstream-port: 8082
