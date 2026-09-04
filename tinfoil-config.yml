@@ -10,7 +10,7 @@ models:
 
 containers:
   - name: "voxtral-small-24b"
-    image: "ghcr.io/tinfoilsh/vllm-openai-audio:v0.0.11@sha256:5c91900505727f91a32a533be9715123e703ea6ffcd7888239b0ebc2fd976d50"
+    image: "ghcr.io/tinfoilsh/confidential-voxtral-small-24b@sha256:0000000000000000000000000000000000000000000000000000000000000000"
     runtime: nvidia
     gpus: all
     restart: always
@@ -18,7 +18,7 @@ containers:
       - PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"
     command: ["--model", "/tinfoil/mpk/mpk-1a0c079030ad08e76e547d70a5249df7dd7393b32c945a8c251e15b796121273", "--served-model-name",
       "voxtral-small-24b", "--tokenizer-mode", "mistral", "--config-format", "mistral", "--load-format", "mistral", "--scheduling-policy",
-      "priority", "--port", "8001"]
+      "priority", "--enable-force-include-usage", "--enable-prompt-tokens-details", "--port", "8001"]
     tmpfs:
       /tmp: size=512m,mode=1777,exec
       /root: size=2g,mode=0700,exec
