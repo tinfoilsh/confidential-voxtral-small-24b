@@ -10,7 +10,7 @@ models:
 
 containers:
   - name: "voxtral-small-24b"
-    image: "ghcr.io/tinfoilsh/confidential-voxtral-small-24b@sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    image: "ghcr.io/tinfoilsh/confidential-voxtral-small-24b@sha256:dc53d5267655f0148e33515bb3aedfff271634e1f5263ce29e67fb25e284c1b5" # v0.0.14
     runtime: nvidia
     gpus: all
     restart: always
