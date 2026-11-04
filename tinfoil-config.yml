@@ -30,6 +30,7 @@ containers:
 
 shim:
   upstream-port: 8082
+  drain_connections: true
   authenticated: true
   authenticated-endpoints:
     - /v1/audio/transcriptions
